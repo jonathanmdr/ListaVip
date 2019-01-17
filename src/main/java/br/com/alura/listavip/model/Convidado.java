@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Entity(name = "convidado")
 public class Convidado {
 
@@ -23,9 +25,11 @@ public class Convidado {
     public Convidado() {
     }
 
-    public Convidado(String nome, String email, String telefone) {
+    public Convidado(Long id, String nome, String email, String telefone) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        System.out.println("Intanciando:" + this.toString());
     }
 }

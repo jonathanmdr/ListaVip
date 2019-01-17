@@ -41,6 +41,7 @@ public class ConvidadoController {
     @RequestMapping("/cadastro")
     public ModelAndView cadastroConvidados(ConvidadoDTO dto) {
         ModelAndView view = new ModelAndView("cadastro");
+        System.out.println("Cadastro:" + dto);
         view.addObject("convidado", convidadoService.dtoToConvidado(dto));
 
         return view;
@@ -48,13 +49,17 @@ public class ConvidadoController {
 
     @PostMapping("/salvar")
     public ModelAndView salvar(@Valid ConvidadoDTO dto, BindingResult result) {
+        boolean sendMail = convidadoService.sendEmail(dto);
 
         if (result.hasErrors()) {
             return cadastroConvidados(dto);
         }
-        
+
         convidadoService.salvar(convidadoService.dtoToConvidado(dto));
-        emailService.enviar(dto.getNome(), dto.getEmail());
+
+        if (sendMail) {
+            emailService.enviar(dto.getNome(), dto.getEmail());
+        }
 
         return listaConvidados();
     }
@@ -62,7 +67,7 @@ public class ConvidadoController {
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         Convidado convidado = convidadoService.findById(id);
-
+        System.out.println("Editar:" + convidado);
         return cadastroConvidados(convidadoService.convidadoToDto(convidado));
     }
 
