@@ -5,8 +5,10 @@ import br.com.alura.listavip.service.ConvidadoService;
 import br.com.alura.listavip.service.EmailService;
 import br.com.alura.listavip.model.Convidado;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +47,12 @@ public class ConvidadoController {
     }
 
     @PostMapping("/salvar")
-    public ModelAndView salvar(ConvidadoDTO dto) {
+    public ModelAndView salvar(@Valid ConvidadoDTO dto, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return cadastroConvidados(dto);
+        }
+        
         convidadoService.salvar(convidadoService.dtoToConvidado(dto));
         emailService.enviar(dto.getNome(), dto.getEmail());
 

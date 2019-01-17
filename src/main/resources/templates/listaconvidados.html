@@ -8,31 +8,44 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Lista de Convidados na ListaVIP</strong>
+        </div>
+        <div class="panel-body">
+            <div class="container">
+                <div id="listaDeConvidados">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nome Convidado</th>
+                            <th>E-mail</th>
+                            <th>Telefone</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tr th:each="convidado : ${convidados}">
+                            <td> <span th:text="${convidado.nome}"></span> </td>
+                            <td> <span th:text="${convidado.email}"></span> </td>
+                            <td> <span th:text="${convidado.telefone}"></span> </td>
+                            <td>
+                                <div class="btn-group pull-right">
+                                    <a th:href="@{/editar/{id}(id=${convidado.id})}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a th:href="@{/excluir/{id}(id=${convidado.id})}" class="btn btn-sm btn-danger">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-    <div class="container">
-        <div id="listaDeConvidados">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>Nome Convidado</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tr th:each="convidado : ${convidados}">
-                    <td> <span th:text="${convidado.nome}"></span> </td>
-                    <td> <span th:text="${convidado.email}"></span> </td>
-                    <td> <span th:text="${convidado.telefone}"></span> </td>
-                    <td>
-                        <div class="btn-group pull-right">
-                            <a th:href="@{/editar/{id}(id=${convidado.id})}" class="btn btn-sm btn-primary">Editar</a>
-                            <a th:href="@{/excluir/{id}(id=${convidado.id})}" class="btn btn-sm btn-danger">Excluir</a>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <hr/>
+
+            <div style ="text-align: left; margin-left: 100px;">
+                <a href="cadastro" class="btn btn-sm btn-success align-items-start">Cadastro</a>
+                <a href="/" class="btn btn-sm btn-primary align-items-start">Voltar</a>
+            </div>
         </div>
     </div>
 
