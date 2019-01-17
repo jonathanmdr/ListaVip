@@ -11,15 +11,21 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Nome Convidado</th>
                     <th>E-mail</th>
                     <th>Telefone</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tr th:each="convidado : ${convidados}">
+                    <td> <span style="visibility:hidden" th:text="${convidado.id}"></span> </td>
                     <td> <span th:text="${convidado.nome}"></span> </td>
                     <td> <span th:text="${convidado.email}"></span> </td>
                     <td> <span th:text="${convidado.telefone}"></span> </td>
+                    <td> <a href="editar" class="btn btn-sm btn-primary">Editar</a> </td>
+                    <td> <a href="excluir" class="btn btn-sm btn-danger">Excluir</a> </td>
                 </tr>
             </table>
         </div>
@@ -40,7 +46,7 @@
             <label for="telefone">Telefone</label>
             <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone"/>
         </div>
-        <button type="submit" class="btn btn-success">Convidar</button>
+        <button type="submit" class="btn btn-success">Salvar Convidado</button>
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
