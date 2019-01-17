@@ -1,7 +1,9 @@
 package br.com.alura.listavip.service;
 
+import br.com.alura.listavip.dto.ConvidadoDTO;
 import br.com.alura.listavip.repository.ConvidadoRepository;
 import br.com.alura.listavip.model.Convidado;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +13,32 @@ public class ConvidadoService {
     @Autowired
     private ConvidadoRepository repository;
 
-    public Iterable<Convidado> obterTodos() {
+    public Iterable<Convidado> findAll() {
         Iterable<Convidado> convidados = repository.findAll();
 
         return convidados;
     }
 
-    public void salvar(Convidado convidado) {
-        repository.save(convidado);
+    public Convidado findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
+
+    public void salvar(Convidado convidado) {
+        if (convidado != null) {
+            repository.save(convidado);
+        }
+    }
+
+    public void excluir(Long id) {
+        repository.deleteById(id);
+    }
+
+    public Convidado dtoToConvidado(ConvidadoDTO dto) {
+        return new Convidado(dto.getNome(), dto.getEmail(), dto.getTelefone());
+    }
+
+    public ConvidadoDTO convidadoToDto(Convidado convidado) {
+        return new ConvidadoDTO(convidado.getId(), convidado.getNome(), convidado.getEmail(), convidado.getTelefone());
+    }
+
 }

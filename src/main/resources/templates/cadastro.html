@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ListaVIP</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Cadastro de Convidados na ListaVIP</strong>
+        </div>
+        <div class="panel-body">
+            <form th:object="${convidado}" th:action="@{/salvar}" method="POST">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" th:field="*{nome}" name="nome" placeholder="Nome"/>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" name="email" placeholder="example@gmail.com"/>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" class="form-control" id="telefone" th:field="*{telefone}" name="telefone" placeholder="Telefone"/>
+                </div>
+                <button type="submit" class="btn btn-sm btn-success">Salvar Convidado</button>
+                <a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</body>
+</html>
