@@ -25,7 +25,8 @@ public class ConvidadoService {
 
     public void salvar(Convidado convidado) {
         if (convidado != null) {
-            repository.save(convidado);
+            System.out.println("ID:" + convidado.getId());
+            repository.saveAndFlush(convidado);
         }
     }
 
@@ -34,11 +35,16 @@ public class ConvidadoService {
     }
 
     public Convidado dtoToConvidado(ConvidadoDTO dto) {
-        return new Convidado(dto.getNome(), dto.getEmail(), dto.getTelefone());
+        System.out.println("dtoToConvidado:" + dto);
+        return new Convidado(dto.getId(), dto.getNome(), dto.getEmail(), dto.getTelefone());
     }
 
     public ConvidadoDTO convidadoToDto(Convidado convidado) {
         return new ConvidadoDTO(convidado.getId(), convidado.getNome(), convidado.getEmail(), convidado.getTelefone());
+    }
+
+    public boolean sendEmail(ConvidadoDTO dto) {
+        return dto.getId() == null ? true : false;
     }
 
 }
