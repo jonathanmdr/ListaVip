@@ -4,13 +4,14 @@ import br.com.alura.listavip.dto.ConvidadoDTO;
 import br.com.alura.listavip.service.ConvidadoService;
 import br.com.alura.listavip.service.EmailService;
 import br.com.alura.listavip.model.Convidado;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ConvidadoController {
@@ -21,32 +22,48 @@ public class ConvidadoController {
     private EmailService emailService;
 
     @RequestMapping("/")
-    public String index() {
-        return "index";
+    public ModelAndView index() {
+        return new ModelAndView("index");
     }
 
     @RequestMapping("/listaconvidados")
-    public String listaConvidados(Model model) {
-        Iterable<Convidado> convidados = convidadoService.obterTodos();
+    public ModelAndView listaConvidados() {
+        Iterable<Convidado> convidados = convidadoService.findAll();
 
-        model.addAttribute("convidados", convidados);
+        ModelAndView view = new ModelAndView("listaconvidados");
+        view.addObject("convidados", convidados);
 
-        return "listaconvidados";
+        return view;
     }
 
-    @PostMapping(value = "salvar")
-    public String salvar(ConvidadoDTO dto, Model model) {
-        convidadoService.salvar(convidadoService.createConvidado(dto));
+    @RequestMapping("/cadastro")
+    public ModelAndView cadastroConvidados(ConvidadoDTO dto) {
+        ModelAndView view = new ModelAndView("cadastro");
+        view.addObject("convidado", convidadoService.dtoToConvidado(dto));
+
+        return view;
+    }
+
+    @PostMapping("/salvar")
+    public ModelAndView salvar(ConvidadoDTO dto) {
+        convidadoService.salvar(convidadoService.dtoToConvidado(dto));
         emailService.enviar(dto.getNome(), dto.getEmail());
 
-        return listaConvidados(model);
+        return listaConvidados();
     }
 
-    @DeleteMapping(value = "excluir")
-    public String excluir(@RequestParam("id") Long id, Model model) {
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Long id) {
+        Convidado convidado = convidadoService.findById(id);
+
+        return cadastroConvidados(convidadoService.convidadoToDto(convidado));
+    }
+
+    @GetMapping("/excluir/{id}")
+    public ModelAndView excluir(@PathVariable("id") Long id) {
         convidadoService.excluir(id);
 
-        return listaConvidados(model);
+        return listaConvidados();
     }
 
 }
