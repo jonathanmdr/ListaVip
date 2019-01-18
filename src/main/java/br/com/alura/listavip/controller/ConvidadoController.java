@@ -3,7 +3,6 @@ package br.com.alura.listavip.controller;
 import br.com.alura.listavip.dto.ConvidadoDTO;
 import br.com.alura.listavip.service.ConvidadoService;
 import br.com.alura.listavip.service.EmailService;
-import br.com.alura.listavip.model.Convidado;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +28,8 @@ public class ConvidadoController {
 
     @RequestMapping("/listaconvidados")
     public ModelAndView listaConvidados() {
-        Iterable<Convidado> convidados = convidadoService.findAll();
-
         ModelAndView view = new ModelAndView("listaconvidados");
-        view.addObject("convidados", convidados);
+        view.addObject("convidados", convidadoService.findAll());
 
         return view;
     }
@@ -47,15 +44,13 @@ public class ConvidadoController {
 
     @PostMapping("/salvar")
     public ModelAndView salvar(@Valid ConvidadoDTO dto, BindingResult result) {
-        boolean sendMail = convidadoService.sendEmail(dto);
-
         if (result.hasErrors()) {
             return cadastroConvidados(dto);
         }
 
         convidadoService.salvar(convidadoService.dtoToConvidado(dto));
 
-        if (sendMail) {
+        if (convidadoService.sendEmail(dto)) {
             emailService.enviar(dto.getNome(), dto.getEmail());
         }
 
@@ -64,8 +59,7 @@ public class ConvidadoController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
-        Convidado convidado = convidadoService.findById(id);
-        return cadastroConvidados(convidadoService.convidadoToDto(convidado));
+        return cadastroConvidados(convidadoService.convidadoToDto(convidadoService.findById(id)));
     }
 
     @GetMapping("/excluir/{id}")

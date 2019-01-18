@@ -13,9 +13,7 @@ public class ConvidadoService {
     private ConvidadoRepository repository;
 
     public Iterable<Convidado> findAll() {
-        Iterable<Convidado> convidados = repository.findAll();
-
-        return convidados;
+        return repository.findAll();
     }
 
     public Convidado findById(Long id) {
@@ -33,11 +31,11 @@ public class ConvidadoService {
     }
 
     public Convidado dtoToConvidado(ConvidadoDTO dto) {
-        return new Convidado(dto.getId(), dto.getNome(), dto.getEmail(), dto.getTelefone());
+        return new Convidado(dto);
     }
 
     public ConvidadoDTO convidadoToDto(Convidado convidado) {
-        return new ConvidadoDTO(convidado.getId(), convidado.getNome(), convidado.getEmail(), convidado.getTelefone());
+        return new ConvidadoDTO(convidado);
     }
 
     public boolean sendEmail(ConvidadoDTO dto) {

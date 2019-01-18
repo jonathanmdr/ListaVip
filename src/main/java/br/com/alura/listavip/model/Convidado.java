@@ -1,5 +1,6 @@
 package br.com.alura.listavip.model;
 
+import br.com.alura.listavip.dto.ConvidadoDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +24,10 @@ public class Convidado {
     public Convidado() {
     }
 
-    public Convidado(Long id, String nome, String email, String telefone) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+    public Convidado(ConvidadoDTO dto) {
+        this.id = dto.getId();
+        this.nome = dto.getNome();
+        this.email = dto.getEmail();
+        this.telefone = dto.getTelefone();
     }
 }
