@@ -18,28 +18,30 @@
         </div>
         <div class="panel-body">
             <div class="container">
-                <div id="listaDeConvidados">
+                <div class="table-responsive" id="listaDeConvidados">
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th>Nome Convidado</th>
-                            <th>E-mail</th>
-                            <th>Telefone</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+                            <tr>
+                                <th scope="col">Nome Convidado</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
                         </thead>
-                        <tr th:each="convidado : ${convidados}">
-                            <td> <span th:text="${convidado.nome}"></span> </td>
-                            <td> <span th:text="${convidado.email}"></span> </td>
-                            <td> <span th:text="${convidado.telefone}"></span> </td>
-                            <td>
-                                <div class="btn-group pull-right">
-                                    <a th:href="@{/editar/{id}(id=${convidado.id})}" class="btn btn-sm btn-primary">Editar</a>
-                                    <a th:href="@{/excluir/{id}(id=${convidado.id})}" class="btn btn-sm btn-danger">Excluir</a>
-                                </div>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr th:each="convidado : ${convidados}">
+                                <td> <span th:text="${convidado.nome}"></span> </td>
+                                <td> <span th:text="${convidado.email}"></span> </td>
+                                <td> <span th:text="${convidado.telefone}"></span> </td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <a th:href="@{/editar/{id}(id=${convidado.id})}" class="btn btn-sm btn-primary">Editar</a>
+                                        <a th:href="@{/excluir/{id}(id=${convidado.id})}" class="btn btn-sm btn-danger">Excluir</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
