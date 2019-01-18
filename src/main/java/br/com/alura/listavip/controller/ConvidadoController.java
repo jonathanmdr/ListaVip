@@ -4,7 +4,6 @@ import br.com.alura.listavip.dto.ConvidadoDTO;
 import br.com.alura.listavip.service.ConvidadoService;
 import br.com.alura.listavip.service.EmailService;
 import br.com.alura.listavip.model.Convidado;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +40,6 @@ public class ConvidadoController {
     @RequestMapping("/cadastro")
     public ModelAndView cadastroConvidados(ConvidadoDTO dto) {
         ModelAndView view = new ModelAndView("cadastro");
-        System.out.println("Cadastro:" + dto);
         view.addObject("convidado", convidadoService.dtoToConvidado(dto));
 
         return view;
@@ -67,7 +65,6 @@ public class ConvidadoController {
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         Convidado convidado = convidadoService.findById(id);
-        System.out.println("Editar:" + convidado);
         return cadastroConvidados(convidadoService.convidadoToDto(convidado));
     }
 
