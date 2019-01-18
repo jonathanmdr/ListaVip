@@ -1,5 +1,6 @@
 package br.com.alura.listavip.dto;
 
+import br.com.alura.listavip.model.Convidado;
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -26,10 +27,10 @@ public class ConvidadoDTO {
     public ConvidadoDTO() {
     }
 
-    public ConvidadoDTO(Long id, String nome, String email, String telefone) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+    public ConvidadoDTO(Convidado convidado) {
+        this.id = convidado.getId();
+        this.nome = convidado.getNome();
+        this.email = convidado.getEmail();
+        this.telefone = convidado.getTelefone();
     }
 }
