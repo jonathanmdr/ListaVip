@@ -4,15 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Artefato da aplicação -->
     <groupId>br.com.alura.listavip</groupId>
     <artifactId>listavip</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <!-- Dependência inicial do Spring Boot para aplicações WEB -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!-- Removendo o container default (Tomcat) do Spring Boot -->
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -22,42 +24,49 @@
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <!-- Adicionando um novo container (Jetty) ao Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <!-- Dependência do framework Thymeleaf para integração com o Front-End -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <!-- Dependência para uso do JPA Data -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <!-- Dependência para uso de recursos fast developer -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <!-- Dependência Apache para envio de e-mails -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
         </dependency>
 
+        <!-- Dependência para conexão JDBC com a base de dados MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.46</version>
         </dependency>
 
+        <!-- Dependência Lombok para simplificar a verbosidade do Java e melhorar a leitura dos objetos criados -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -66,6 +75,7 @@
         </dependency>
     </dependencies>
 
+    <!-- Build application -->
     <build>
         <plugins>
             <plugin>
