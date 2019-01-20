@@ -54,7 +54,7 @@ public class ConvidadoController {
             emailService.enviar(dto.getNome(), dto.getEmail());
         }
 
-        return listaConvidados();
+        return new ModelAndView("redirect:/listaconvidados");
     }
 
     @GetMapping("/editar/{id}")
@@ -66,7 +66,7 @@ public class ConvidadoController {
     public ModelAndView excluir(@PathVariable("id") Long id) {
         convidadoService.excluir(id);
 
-        return listaConvidados();
+        return new ModelAndView("redirect:/listaconvidados");
     }
 
 }
