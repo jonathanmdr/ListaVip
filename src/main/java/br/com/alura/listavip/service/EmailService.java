@@ -20,6 +20,7 @@ public class EmailService {
             email.setAuthenticator(new DefaultAuthenticator(emailfrom, password));
             email.setDebug(true);
             email.setSSLOnConnect(true);
+            email.setCharset("UTF-8");
 
             email.setFrom(emailfrom);
             email.setSubject("Você foi convidado pelo ListaVIP");
