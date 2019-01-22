@@ -8,13 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.springframework.context.annotation.Scope;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Getter
 @Setter
 @Entity(name = "convidado")
-@Scope(value = WebApplicationContext.SCOPE_SESSION)
+@SessionScope
 public class Convidado {
 
     @Id

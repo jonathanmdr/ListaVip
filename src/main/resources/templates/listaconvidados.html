@@ -13,13 +13,23 @@
 </head>
 <body>
     <div class="panel panel-default">
+
+        <!-- Painel heading -->
         <div class="panel-heading">
             <strong>Lista de Convidados na ListaVIP</strong>
         </div>
+
+        <!-- Painel body -->
         <div class="panel-body">
             <div class="container">
+
+                <!-- Lista de convidados -->
                 <div class="table-responsive" id="listaDeConvidados">
+
+                    <!-- Table convidados -->
                     <table class="table table-hover">
+
+                        <!-- Table head -->
                         <thead>
                             <tr>
                                 <th scope="col">Nome Convidado</th>
@@ -28,14 +38,21 @@
                                 <th scope="col"></th>
                             </tr>
                         </thead>
+
+                        <!-- Table Body -->
                         <tbody>
                             <tr th:each="convidado : ${convidados}">
                                 <td> <span th:text="${convidado.nome}"></span> </td>
                                 <td> <span th:text="${convidado.email}"></span> </td>
                                 <td> <span th:text="${convidado.telefone}"></span> </td>
                                 <td>
+                                    <!-- Botões da table -->
                                     <div class="btn-group pull-right">
+
+                                        <!-- Editar -->
                                         <a th:href="@{/editar/{id}(id=${convidado.id})}" class="btn btn-sm btn-primary">Editar</a>
+
+                                        <!-- Excluir -->
                                         <a th:href="@{/excluir/{id}(id=${convidado.id})}" class="btn btn-sm btn-danger">Excluir</a>
                                     </div>
                                 </td>
@@ -47,8 +64,13 @@
 
             <hr/>
 
+            <!-- Botões do formulário -->
             <div style ="text-align: left; margin-left: 100px;">
+
+                <!-- Cadastrar -->
                 <a href="cadastro" class="btn btn-sm btn-success align-items-start">Cadastro</a>
+
+                <!-- Voltar -->
                 <a href="/" class="btn btn-sm btn-primary align-items-start">Voltar</a>
             </div>
         </div>
