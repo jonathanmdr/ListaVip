@@ -17,7 +17,7 @@ public class ConvidadoService {
     }
 
     public Convidado findById(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).get();
     }
 
     public void salvar(Convidado convidado) {

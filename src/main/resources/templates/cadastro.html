@@ -13,13 +13,21 @@
 </head>
 <body>
     <div class="panel panel-default">
+
+        <!-- Painel heading -->
         <div class="panel-heading">
             <strong>Cadastro de Convidados na ListaVIP</strong>
         </div>
+
+        <!-- Painel body -->
         <div class="panel-body">
+
+            <!-- Formulário de cadastro -->
             <form th:object="${convidado}" th:action="@{/salvar}" method="POST" style="margin: 10px;">
                 <div class="form-group">
                     <fieldset>
+
+                        <!-- Alert de erros -->
                         <div class="form-group row">
                             <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
                                 <div th:each="detailedError : ${#fields.detailedErrors()}">
@@ -27,26 +35,38 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- ID -->
                         <input type="hidden" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+
+                        <!-- Nome -->
                         <div class="form-group row">
                             <div th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
                                 <label for="nome">Nome Completo</label>
                                 <input type="text" class="form-control" id="nome" th:field="*{nome}" name="nome" placeholder="Nome" maxlength="255" required/>
                             </div>
                         </div>
+
+                        <!-- E-mail -->
                         <div class="form-group row">
                             <div th:classappend="${#fields.hasErrors('email')}? 'has-error'">
                                 <label for="email">E-mail</label>
                                 <input type="email" class="form-control" id="email" th:field="*{email}" name="email" placeholder="example@gmail.com" maxlength="255" required/>
                             </div>
                         </div>
+
+                        <!-- Telefone -->
                         <div class="form-group row">
                             <div th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
                                 <label for="telefone">Telefone</label>
                                 <input type="text" class="form-control" id="telefone" th:field="*{telefone}" name="telefone" placeholder="Telefone" maxlength="11" required/>
                             </div>
                         </div>
+
+                        <!-- Salvar -->
                         <button type="submit" class="btn btn-sm btn-success">Salvar Convidado</button>
+
+                        <!-- Cancelar -->
                         <a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
                     </fieldset>
                 </div>
