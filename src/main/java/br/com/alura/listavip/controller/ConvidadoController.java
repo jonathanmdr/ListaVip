@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestScope
@@ -45,12 +46,14 @@ public class ConvidadoController {
     }
 
     @PostMapping("/salvar")
-    public ModelAndView salvar(@Valid ConvidadoDTO dto, BindingResult result) {
+    public ModelAndView salvar(@Valid ConvidadoDTO dto, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return cadastroConvidados(dto);
         }
 
         convidadoService.salvar(convidadoService.dtoToConvidado(dto));
+
+        redirectAttributes.addFlashAttribute("msg", "Registro salvo com sucesso!");
 
         if (convidadoService.sendEmail(dto)) {
             emailService.enviar(dto.getNome(), dto.getEmail());
@@ -65,8 +68,10 @@ public class ConvidadoController {
     }
 
     @GetMapping("/excluir/{id}")
-    public ModelAndView excluir(@PathVariable("id") Long id) {
+    public ModelAndView excluir(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         convidadoService.excluir(id);
+
+        redirectAttributes.addFlashAttribute("msg", "Registro excluído com sucesso!");
 
         return new ModelAndView("redirect:/listaconvidados");
     }
