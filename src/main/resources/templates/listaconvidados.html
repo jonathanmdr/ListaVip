@@ -19,6 +19,13 @@
             <strong>Lista de Convidados na ListaVIP</strong>
         </div>
 
+        <!-- Resposta das transações -->
+        <div>
+            <strong>
+                <span style="text-align: center; color: navy" th:text="${msg}"></span>
+            </strong>
+        </div>
+
         <!-- Painel body -->
         <div class="panel-body">
             <div class="container">
@@ -53,7 +60,7 @@
                                         <a th:href="@{/editar/{id}(id=${convidado.id})}" class="btn btn-sm btn-primary">Editar</a>
 
                                         <!-- Excluir -->
-                                        <a th:href="@{/excluir/{id}(id=${convidado.id})}" class="btn btn-sm btn-danger">Excluir</a>
+                                        <a th:href="@{/excluir/{id}(id=${convidado.id})}" class="btn btn-sm btn-danger" onclick="return confirm('Confirma a exclusão do registro?')">Excluir</a>
                                     </div>
                                 </td>
                             </tr>
