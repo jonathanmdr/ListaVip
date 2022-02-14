@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
-    private static String emailfrom = "devsoftsta@gmail.com";
-    private static String password = "a9d9p8.E10";
+    private static String emailfrom = "email@gmail.com";
+    private static String password = "myPassToLogin";
 
     public void enviar(String nome, String emailDestinatario) {
         try {
